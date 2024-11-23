@@ -31,7 +31,7 @@ ls.add_snippets('javascript', {
             {}
           </div>
         );
-      }};
+      }}
     ]],
       {
         insertNode(1),
@@ -50,7 +50,38 @@ ls.add_snippets('javascript', {
       [[
       export function {}() {{
         return {{}};
-      }};
+      }}
+    ]],
+      {
+        insertNode(1),
+      }
+    )
+  ),
+})
+
+-- NOTE: BASIC ASYNC FUNCTION
+ls.add_snippets('javascript', {
+  s(
+    'afunc',
+    fmt(
+      [[
+      export async function {}() {{
+        return {{}};
+      }}
+    ]],
+      {
+        insertNode(1),
+      }
+    )
+  ),
+})
+
+ls.add_snippets('javascript', {
+  s(
+    'tne',
+    fmt(
+      [[
+      throw new Error({});
     ]],
       {
         insertNode(1),
