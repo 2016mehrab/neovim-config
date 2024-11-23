@@ -926,6 +926,29 @@ require('lazy').setup({
 
 -- NOTE: ESHAN IS LOADING PERSONAL SNIPPETS
 require 'custom.snippets.custom-js-snippets'
+require 'custom.snippets.custom-java-snippets'
+
+-- NOTE: ESHAN IS CREATING PERSONAL KEYMAPS
+vim.api.nvim_set_keymap('v', '<leader>rp', '<Nop>', {
+  desc = 'Replaces text in the selected block',
+  noremap = true,
+  silent = false,
+  callback = function()
+    -- Exit visual mode and enter normal mode
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<esc>', true, false, true), 'x', true)
+    -- Feed the substitution command in normal mode ('n')
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":'<,'>s/\\<lua\\>/bua/g", true, false, true), 'n', true)
+
+    vim.api.nvim_create_autocmd('CmdlineLeave', {
+      desc = 'Clear highlight after replacing text',
+      group = vim.api.nvim_create_augroup('replace_text', { clear = true }),
+      pattern = '*',
+      callback = function()
+        vim.cmd 'set nohlsearch'
+      end,
+    })
+  end,
+})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
