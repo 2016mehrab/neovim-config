@@ -53,3 +53,25 @@ ls.add_snippets('java', {
     )
   ),
 })
+
+-- NOTE: Nested for-loop snippet
+ls.add_snippets('java', {
+  s(
+    'nloop',
+    fmt(
+      [[
+              for ({} r = 0; r < {}; ++r) {{
+                  for ({} c = 0; c < {}; ++c) {{
+
+                  }}
+              }}
+      ]],
+      {
+        insertNode(1, 'int'),
+        insertNode(2, '10'),
+        repetition(1),
+        insertNode(3, '10'),
+      }
+    )
+  ),
+})
