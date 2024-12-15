@@ -100,7 +100,6 @@ vim.g.have_nerd_font = true
 
 -- NOTE: ESHAN ADDED THIS FOR NVIM-COLORIZER
 vim.opt.termguicolors = true
-
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -146,7 +145,8 @@ vim.opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+-- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = '» ', trail = ' ', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
@@ -854,7 +854,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'java' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'java', 'javascript', 'tsx' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -899,6 +899,9 @@ require('lazy').setup({
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.vim-tmux-navigator',
   require 'kickstart.plugins.oil-nvim',
+  require 'kickstart.plugins.inc-rename',
+  require 'kickstart.plugins.timber',
+  require 'kickstart.plugins.nvim-ts-autotag',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
   require 'kickstart.plugins.nvim-colorizer',
 
@@ -935,6 +938,28 @@ vim.cmd.colorscheme 'catppuccin'
 -- NOTE: ESHAN IS LOADING PERSONAL SNIPPETS
 require 'custom.snippets.custom-js-snippets'
 require 'custom.snippets.custom-java-snippets'
+
+-- NOTE: KEYMAPS FOR MACRO RECORDING
+vim.keymap.set('n', '<leader>rec', 'qm', { noremap = true, silent = true, desc = "Start recording macro into register 'm'" })
+-- NOTE: KEYMAPS FOR MACRO APPLYING
+vim.keymap.set('n', '<leader>rr', '@m', { noremap = true, silent = true, desc = "Apply macro stored in register 'm'" })
+
+-- NOTE: ESHAN IS CREATING KEYMAPS FOR INC-RENAME PLUGIN
+vim.keymap.set('n', '<leader>rn', ':IncRename ')
+
+-- NOTE: ESHAN IS CREATING KEYMAPS WORD WRAP NAVIGATION EASE
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
+
+-- NOTE: ESHAN ADDED THIS FOR FASTER NAVIGATION
+vim.keymap.set('n', 'J', '}')
+vim.keymap.set('n', 'K', '{')
+-- NOTE: ESHAN UNBINDED DEFAULT VIM KEYBIND
+vim.keymap.set({ 'n', 'x' }, 's', '<Nop>')
+
+-- NOTE: ESHAN ADDED THIS TO USE Treesitter FOLDING
+-- NOTE: ESHAN ADDED THIS TO ENABLE HOVER
+vim.keymap.set('n', '<leader>dc', vim.lsp.buf.hover, { noremap = true, silent = true, desc = 'Show hover documentation' })
 
 -- NOTE: ESHAN IS CREATING PERSONAL KEYMAPS
 vim.api.nvim_set_keymap('v', '<leader>rp', '<Nop>', {

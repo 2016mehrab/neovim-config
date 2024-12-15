@@ -75,3 +75,37 @@ ls.add_snippets('java', {
     )
   ),
 })
+
+-- NOTE: Snippet for converting a string to a 2D array
+ls.add_snippets('java', {
+  s(
+    'stoa',
+    fmt(
+      [[
+      public static {}[][] convertStringTo2DArray(String input) {{
+          input = input.trim().substring(1, input.length() - 1);
+          String[] rows = input.split("\\],\\[");
+          {}[][] result = new {}[rows.length][];
+
+          for (int i = 0; i < rows.length; i++) {{
+              rows[i] = rows[i].replace("[", "").replace("]", "");
+              String[] numbers = rows[i].split(",");
+              result[i] = Arrays.stream(numbers)
+                      .mapTo{}({}::parse{})
+                      .toArray();
+          }}
+
+          return result;
+      }}
+      ]],
+      {
+        insertNode(1, 'int'), -- Return type (e.g., int, double, etc.)
+        repetition(1),
+        repetition(1),
+        insertNode(2, 'Int'),
+        insertNode(3, 'Integer'), -- Parser type (e.g., Integer, Double, etc.)
+        repetition(2), -- Parser method (e.g., Int, Double, etc.)
+      }
+    )
+  ),
+})
