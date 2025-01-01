@@ -1012,7 +1012,16 @@ vim.keymap.set('n', 'K', '{')
 -- NOTE: ESHAN UNBINDED DEFAULT VIM KEYBIND
 vim.keymap.set({ 'n', 'x' }, 's', '<Nop>')
 
--- NOTE: ESHAN ADDED THIS TO USE Treesitter FOLDING
+-- NOTE: ESHAN ADDED THIS TO FIX SPACES IN JAVA FILE
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'java',
+  callback = function()
+    vim.opt.tabstop = 4
+    vim.opt.shiftwidth = 4
+    vim.opt.expandtab = true
+  end,
+})
+
 -- NOTE: ESHAN ADDED THIS TO ENABLE HOVER
 vim.keymap.set('n', '<leader>dc', vim.lsp.buf.hover, { noremap = true, silent = true, desc = 'Show hover documentation' })
 
